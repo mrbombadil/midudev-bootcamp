@@ -1,5 +1,6 @@
 const Mensaje = (props) => {
-    return <h1 style={{ color: props.color }}>Hola, el mensaje es: { props.message } </h1>
+    const {color, message} = props;
+    return <h1 style={{ color: color }}>Hola, el mensaje es: { message } </h1>
 }
 
 export default Mensaje;
