@@ -17,25 +17,24 @@ const Ranking = ({text, value}) => (
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
+  /*const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  const [all, setAll] = useState(0)
+  const [all, setAll] = useState(0)*/
 
-  const setToValue = (rank) => {
-    switch (rank){
-      case 'good':
-        setGood(good + 1);
-        break;
-      case 'bad':
-        setBad(bad + 1);
-        break;
-      case 'neutral':
-        setNeutral(neutral + 1);
-        break;
-      default: break;      
-    }
-    setAll(all + 1);
+  const [ranking, setRanking] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+    all: 0
+  })
+
+  const setToValue = rank => {
+    ranking[rank] !== undefined && setRanking({
+      ...ranking,
+      [rank]: ranking[rank] + 1,
+      all: ranking.all + 1 
+    });    
   }
 
   return (
@@ -46,10 +45,10 @@ const App = () => {
       <Button handleClick={() => setToValue("bad")} text="bad" />      
       
       <Title text="Statistics" />
-      <Ranking text="Good" value={good} />
-      <Ranking text="Neutral" value={neutral} />
-      <Ranking text="Bad" value={bad} />
-      <Ranking text="All" value={good + bad + neutral} />
+      <Ranking text="Good" value={ranking.good} />
+      <Ranking text="Neutral" value={ranking.neutral} />
+      <Ranking text="Bad" value={ranking.bad} />
+      <Ranking text="All" value={ranking.good + ranking.bad + ranking.neutral} />
     </div>
   )
 }
